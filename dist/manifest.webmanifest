@@ -1,0 +1,25 @@
+{
+  "name": "囤囤管家",
+  "short_name": "囤囤",
+  "description": "个人日用品与囤货库存管理",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f4eb",
+  "theme_color": "#f7f4eb",
+  "icons": [
+    {
+      "src": "icon-hamster-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-hamster-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "id": "./"
+}
