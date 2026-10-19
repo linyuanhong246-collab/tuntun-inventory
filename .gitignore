@@ -1,0 +1,20 @@
+# Keep personal inventory and backups outside this repository.
+*.xlsx
+*.xls
+*.csv
+*.tsv
+*.zip
+*.tar.gz
+*.bak
+*backup*.json
+*备份*.json
+*快照*.json
+inventory-audit.json
+private/
+backups/
+upload/
+.env
+.env.*
+.DS_Store
+Thumbs.db
+node_modules/
