@@ -35,7 +35,7 @@ test('old version backup remains readable on the Pages release',async()=>{
   const db=emptyDb();await I.seed(db,[]);const legacy=await I.backup(db);const decoded=await S.decode(legacy);S.validate(decoded);assert.equal(decoded.items.length,0);
 });
 test('offline install resolves every precached asset inside the repository path',async()=>{
-  const w=worker();await w.lifecycle('install');assert(w.requests.length>10);assert(w.requests.every(u=>u.startsWith('https://example.github.io/tuntun-inventory/')));w.setOffline();assert.match(await w.fetchEvent('https://example.github.io/tuntun-inventory/','navigate'),/CACHED:.*\/index.html$/);assert.match(await w.fetchEvent('https://example.github.io/tuntun-inventory/manage-ui.js?v=0.13.1'),/^CACHED:/);
+  const w=worker();await w.lifecycle('install');assert(w.requests.length>10);assert(w.requests.every(u=>u.startsWith('https://example.github.io/tuntun-inventory/')));w.setOffline();assert.match(await w.fetchEvent('https://example.github.io/tuntun-inventory/','navigate'),/CACHED:.*\/index.html$/);assert.match(await w.fetchEvent(new URL(read('index.html').match(/src="(manage-ui[^"]+)"/)[1],'https://example.github.io/tuntun-inventory/').href),/^CACHED:/);
 });
 test('cache upgrade leaves other repository caches and IndexedDB untouched',async()=>{
   const w=worker();w.stores.set(w.sandbox.prefix+'old',new Map());w.stores.set('tuntun-pages:/other-repository/:old',new Map());w.stores.set('another-app-cache',new Map());await w.lifecycle('install');await w.lifecycle('activate');assert.deepEqual(w.deleted,[w.sandbox.prefix+'old']);assert(w.stores.has('another-app-cache'));assert(w.stores.has('tuntun-pages:/other-repository/:old'));
